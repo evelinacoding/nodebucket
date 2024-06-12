@@ -1,0 +1,48 @@
+<!--
+  Title: signin.component.html
+  Author: Evelyn Zepeda
+  Date: 6/9/24
+  Description: The Sign In component.-->
+
+
+<!--Login Form-->
+<div class="box">
+
+  <div class="row justify-content-center nt-5">
+    <img class="col-md-6" src="../../assets/gryffindor-symbol.jpg">
+    <div class="col-md-6 remove-padding">
+      <div class="card shadow">
+
+        <!--error alert message-->
+        <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <div class="card-body">
+           <h1 class="display-1 card-title text-center">Sign In</h1>
+          <form [formGroup]="signinForm" (ngSubmit)="signin(); signinForm.reset();">
+            <div class="mb-4">
+              <label for="empId" class="form-label">Employee ID:</label>
+              <input type="text" class="form-control" id="empId" formControlName="empId" />
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-lg">
+                <span *ngIf="!isLoading">Sign in</span>
+
+                <div *ngIf="isLoading">
+                  <!--loading spinner-->
+
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...
+                </div>
+              </button>
+            </div>
+
+
+          </form>
+        </div><a routerLink="/" class="text-dark text-underline-hover">Return</a>
+      </div>
+
+    </div>
+  </div>
+</div>

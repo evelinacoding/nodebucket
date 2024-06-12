@@ -1,0 +1,50 @@
+div {
+  background-color: #511817;
+}
+
+h1 {
+  color: #fba33a;
+  font-size: 300px;
+  margin-top: 100px;
+  font-family: Potter-font;
+  text-shadow: 12px 12px 15px #ce2802;
+}
+
+h2 {
+  color: #fff;
+  font-size: 150px;
+  padding: 80px;
+  font-family: Open-Sauce;
+
+}
+
+
+.button-background {
+  text-align: center;
+  background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='18.88' height='37.55' patternTransform='scale(9) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='hsla(33, 96%, 61%, 1)'/><path d='M18.88 18.8 9.5.05.12 18.8 9.5 37.55Z'  stroke-width='1' stroke='none' fill='hsla(11, 86%, 31%, 1)'/><path d='M.23 0 0 .15l.8 1.58.22-.16Zm18.42 0-.8 1.57.23.15.8-1.57zM1.83 3.17l-.23.16.8 1.57.23-.15Zm15.22 0-.8 1.58.22.15.8-1.57zM3.4 6.33l-.23.14.8 1.58.23-.15Zm12.07 0-.8 1.57.23.15.8-1.57zM5 9.5l-.22.15.8 1.57.22-.15zm8.88 0-.8 1.57.22.15.8-1.57zm-7.3 3.17-.23.16.8 1.57.23-.15zm5.72 0-.8 1.58.23.15.8-1.57zm-4.13 3.18-.22.15.8 1.57.23-.15zm2.53 0-.8 1.57.23.15.8-1.57zm-1.57 3.17-.8 1.58.22.15.8-1.58zm.62 0-.22.15.8 1.58.22-.15zM7.53 22.2l-.8 1.57.22.15.8-1.57zm3.82 0-.22.15.8 1.57.22-.15zm-5.4 3.17-.8 1.6.23.13.8-1.57zm6.98 0-.23.15.8 1.58.23-.13zm-8.55 3.18-.8 1.57.22.15.8-1.57zm10.12 0-.23.15.8 1.57.23-.15zM2.78 31.7l-.8 1.57.22.18.8-1.6Zm13.32 0-.23.15.8 1.6.23-.18zM1.2 34.9l-.8 1.57.23.16.8-1.58zm16.48 0-.23.15.8 1.57.23-.14z'  stroke-width='1' stroke='none' fill='hsla(1, 56%, 20%, 1)'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(%23a)'/></svg>");
+
+}
+
+.button-container {
+  width: 25%;
+  height: 300px;
+  font-size: 100px;
+  padding: 40px;
+  margin: 0 auto;
+  margin-bottom: 300px;
+  margin-top: 100px;
+}
+
+button {
+  background-color: #94230B;
+  color: #d19969;
+  width: 100px;
+  height: 100px;
+  padding: 30px;
+  border: 0;
+  font-family: Open-Sauce;
+}
+
+.welcome {
+  margin: 400px;
+}
