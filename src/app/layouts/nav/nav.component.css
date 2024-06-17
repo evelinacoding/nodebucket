@@ -1,14 +1,22 @@
-a {
-  font-size: 150px;
+.nav-link {
+  font-size: 20px;
   padding-left: 40px;
+  color: #fff;
+  font-family: Open-Sauce, sans-serif;
 }
 
-.navbar-toggler-icon {
-  font-size: 100px;
+button {
+  background-color: #817c7a;
+  margin-right: 10px;
 }
 
 .title {
   color: #fba33a;
   font-family: Potter-font;
-  text-shadow: 12px 12px 15px #ce2802;
+  -webkit-text-stroke: 1px #94230B;
+  font-size: 50px;
+}
+
+.dropdown {
+  width: 40px;
 }

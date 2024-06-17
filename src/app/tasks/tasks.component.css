@@ -1,0 +1,68 @@
+.img-div {
+  background-image: url('../../assets/outer-hogwarts.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.tasks-container {
+  margin: 150px;
+
+}
+
+.potter-font {
+  font-family: Potter-font;
+  color: #fba33a;
+  text-align: center;
+  -webkit-text-stroke: 2px #94230B;
+  font-size: 50px;
+}
+
+h1, h2{
+  color: white;
+}
+
+.tasks-columns {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 400px;
+}
+
+.tasks-column {
+  width: 45%;
+}
+
+.tasks-column h2 {
+  text-align: center;
+}
+
+.tasks-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-height: 300px;
+}
+
+.tasks-form {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tasks-form input[type='text'] {
+  flex-grow: 1;
+}
+
+.no-tasks {
+  text-align: center;
+  margin-top: 20%;
+}
+
+.tasks-card {
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}

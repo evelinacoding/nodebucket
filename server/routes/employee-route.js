@@ -45,7 +45,7 @@ const ajv = new Ajv(); //creates a new instance of the Ajv object from the npm p
  *    '500':
  *      description: Internal Server Error
  *   tags:
- *    - Employee
+ *    - Get Employee by ID
  */
 
 router.get("/:empId", (req, res, next) => {
@@ -95,6 +95,32 @@ router.get("/:empId", (req, res, next) => {
  * @throws { 404 } - if no tasks are found
  */
 
+/**
+ * findAllTasks
+ * @openapi
+ * /api/employees/{empId}/tasks:
+ *  get:
+ *   summary: Finds all the tasks by empId
+ *   description: API for returning tasks
+ *   parameters:
+ *     - name: empId
+ *       in: path
+ *       description: Employee ID
+ *       schema:
+ *         type: Number
+ *   responses:
+ *    '200':
+ *      description: OK
+ *    '400':
+ *      description: Bad Request
+ *    '404':
+ *      description: Not Found
+ *    '500':
+ *      description: Internal Server Error
+ *   tags:
+ *    - Find All Tasks
+ */
+
 router.get('/:empId/tasks', (req, res, next) => {
   try {
 
@@ -139,6 +165,8 @@ router.get('/:empId/tasks', (req, res, next) => {
  * Create Task API
  */
 
+
+
 const taskSchema = {
   type: 'object',
   properties: {
@@ -148,6 +176,45 @@ const taskSchema = {
   required: ['text'],
   additionalProperties: true
 };
+
+/**
+ * createTask
+ * @openapi
+ * /api/employees/{empId}/tasks:
+ *   post:
+ *     tags:
+ *       - Employees
+ *     description: Creates a task by empId
+ *     summary: Creates task by empId
+ *     parameters:
+ *        - name: empId
+ *          in: path
+ *          required: true
+ *          description: Create task by empId
+ *          schema:
+ *            type: number
+ *     requestBody:
+ *       description: Creates a new task by empId
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - text
+ *             properties:
+ *               text:
+ *                 type: string
+ *     responses:
+ *       '201':
+ *         description: Task Created
+ *       '400':
+ *         description: Bad Request
+ *       '404':
+ *         description: Not Found
+ *       '500':
+ *         description: Server Exception
+ */
+
 
 router.post('/:empId/tasks', (req, res, next)=> {
   try {
@@ -193,6 +260,7 @@ router.post('/:empId/tasks', (req, res, next)=> {
       // call the mongo module and update the employee collection with the new task in the todo column
       const result = await db.collection('employees').updateOne({ empId: empId }, {
         $push: { todo: newTask }
+
       })
 
       if(!result.modifiedCount) {

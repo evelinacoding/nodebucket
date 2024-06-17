@@ -4,19 +4,21 @@
   Date: 6/9/24
   Description: The home component.-->
 
-<div class="container-fluid p-0 main">
+<div class="container p-0 main col-12 col-md background">
 
-    <div class="card">
+    <div class="card col-sm background">
       <img class="img-fluid max-width: 100%; height: auto;" src="../../assets/hogwarts-letter.jpg">
 
-      <div class="button-background">
-      <div class="welcome">
-        <h1>Welcome to Nodebucket</h1>
+      <div class="button-background container">
+        <div class=" col-sm card welcome">
+          <h1>Welcome to Nodebucket</h1>
 
-        <h2>Master Your Tasks, Elevate Your Day!</h2>
+          <h2>Master Your Tasks, Elevate Your Day!</h2>
+          <div class="button-container">
+            <button type="submit" routerLink="/security/signin">Sign In</button>
+          </div>
 
-        <button class="button-container" type="submit" routerLink="/security/signin">Sign In</button>
-    </div>
+        </div>
     </div>
       <img class="img-fluid max-width: 100%; height: auto;" src="../../assets/goblet.jpg">
   </div>

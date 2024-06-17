@@ -1,0 +1,32 @@
+h1 {
+  font-family: Potter-font;
+  color: #fba33a;
+  text-align: center;
+  -webkit-text-stroke: 1px #94230B;
+  font-size: 70px;
+  padding: 20px;
+}
+
+.hall {
+  padding: 0;
+}
+
+.map-container {
+  background-color: #511817;
+  text-align: center;
+
+}
+
+.contact-info {
+  margin: 30px;
+}
+
+h4, svg {
+  color: #fff;
+  margin: 20px;
+  font-family: Open-Sauce;
+}
+
+.map {
+  width: 35%;
+}

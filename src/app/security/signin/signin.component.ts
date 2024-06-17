@@ -1,8 +1,8 @@
+import { SecurityService } from './../security.service';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router} from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { SecurityService } from '../security.service';
 
 // This is the session user interface with empId, firstName, and lastName fields
 export interface SessionUser {
@@ -62,12 +62,11 @@ export class SigninComponent {
 
           this.sessionUser = employee; // set the session user
           this.cookieService.set('session_user', empId, 1); // set the session_user cookie
-          this.cookieService.set('session_name', `$employee.firstName $employee.lastName`, 1) // set the session_name cookie
+          this.cookieService.set('session_name', `${employee.firstName} ${employee.lastName}`, 1) // set the session_name cookie
 
-          //check if there is a return URL
-          const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+
           this.isLoading= false; // set isLoading to false to hide the loading spinner
-          this.router.navigate([returnUrl])// redirect users to the returnUrl or homepage
+          this.router.navigate(['/tasks'])// redirect users to the returnUrl or homepage
         },
 
         // if error, display error message to user
@@ -76,9 +75,10 @@ export class SigninComponent {
           //check if there is an err.error.message property
           // if so, display the custom error message from the security API
           if(err.error.message) {
-            if (err.error.message) {
               this.errorMessage = err.error.message;
               return;
+            } else {
+              this.errorMessage = err.message;
             }
 
             //if not, display the standard error message
@@ -86,6 +86,6 @@ export class SigninComponent {
 
 
         }
-      })
+      )
     }
 }
