@@ -1,60 +1,87 @@
+<!--
+ /**
+ * Title: tasks.component.html
+ * Author: Evelyn Zepeda
+ * Date: 6/27/24
+ */
+-->
 <div class="img-div card">
   <div class="tasks-container">
-
     <h1 class="potter-font">My Tasks</h1>
 
-    <!-- tasks form-->
+    <div *ngIf="errorMessage">
+      <div class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+    </div>
+
+    <div *ngIf="successMessage">
+      <div class="alert alert-success" role="alert">
+        {{ successMessage }}
+      </div>
+    </div>
+
+    <!-- tasks form -->
     <div class="form-container">
-      <form #taskForm='ngForm' (ngSubmit)="createTask(taskForm); taskForm.reset();" class="tasks-form">
-      <input type="text" name="task" ngModel required placeholder="Enter a new task">
-      <input type="submit" [disabled]="!taskForm.valid" value="Add Task">
+      <form #taskForm="ngForm" (ngSubmit)="createTask(taskForm); taskForm.reset();" class="tasks-form">
+        <input type="text" name="task" ngModel required placeholder="Enter a new task">
+        <input type="submit" [disabled]="!taskForm.valid" value="Add Task">
       </form>
     </div>
 
-
-    <!--task container-->
+    <!-- task container -->
     <div class="tasks-columns">
-
-      <!--tasks todo column-->
+      <!-- tasks todo column -->
       <div class="tasks-column">
-        <!--The title needs to be inside the div otherwise you have 4 columns instead od 2-->
         <h2>To Do</h2>
 
-        <div class="tasks-box">
+        <div class="container tasks-box"
+          cdkDropList
+          #todoList="cdkDropList"
+          [cdkDropListData]="todo"
+          [cdkDropListConnectedTo]="[doneList]"
+          (cdkDropListDropped)="drop($event)">
 
           <!-- no tasks found -->
           <div *ngIf="todo.length === 0 || !todo" class="no-tasks">
             No tasks to do yet!
           </div>
 
-          <!-- tasks card-->
-          <div *ngFor="let item of todo" class="tasks-card">
+          <!-- tasks card -->
+          <div *ngFor="let item of todo" cdkDrag class="tasks-card mt-2">
             {{ item.text }}
+            <button class="float-end" (click)="deleteTask(item._id)">
+              <span class="material-icons">delete</span>
+            </button>
           </div>
         </div>
-
       </div>
 
       <!-- tasks done column -->
       <div class="tasks-column">
         <h2>Done</h2>
-        <div class="tasks-box">
 
-          <!--no tasks found -->
+        <div class="container tasks-box"
+          cdkDropList
+          #doneList="cdkDropList"
+          [cdkDropListData]="done"
+          [cdkDropListConnectedTo]="[todoList]"
+          (cdkDropListDropped)="drop($event)">
+
+          <!-- no tasks found -->
           <div *ngIf="done.length === 0 || !done" class="no-tasks">
             No tasks done yet!
-
-            <!-- tasks card -->
-            <div *ngFor="let item of done" class="tasks-card">
-              {{ item.text }}
-            </div>
           </div>
 
+          <!-- tasks card -->
+          <div *ngFor="let item of done" cdkDrag class="tasks-card mt-2">
+            {{ item.text }}
+            <button class="float-end" (click)="deleteTask(item._id)">
+              <span class="material-icons">delete</span>
+            </button>
+          </div>
         </div>
-
-
       </div>
     </div>
   </div>
 </div>
-

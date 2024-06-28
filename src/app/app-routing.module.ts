@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { authGuard } from './shared/auth.guard';
 import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 // routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 const routes: Routes = [
@@ -36,6 +38,16 @@ const routes: Routes = [
         title: 'Contact Us'
       },
       {
+        path: 'about',
+        component: AboutComponent,
+        title: 'About Us'
+      },
+      {
+        path: 'not-found',
+        component: NotFoundComponent,
+        title: '404 Not Found'
+      },
+      {
         path: 'tasks',
         component: TasksComponent,
         canActivate: [authGuard], //Makes it so the guard restricts access to the task page
@@ -46,6 +58,10 @@ const routes: Routes = [
     // path for the security module (e.g. login, register, forgot password, etc.)
     path: 'security',
     loadChildren: () => import('./security/security.module').then(m => m.SecurityModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found'
   }
 ];
 

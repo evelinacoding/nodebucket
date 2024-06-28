@@ -1,19 +1,19 @@
 /**
- * Title: security.service.spec.ts
+ * Title: tasks.service.spec.ts
  * Author: Evelyn Zepeda
  * Date: 6/27/24
  */
 
 import { TestBed } from '@angular/core/testing';
 
-import { SecurityService } from './security.service';
+import { TaskService } from './task.service';
 
-describe('SecurityService', () => {
-  let service: SecurityService;
+describe('TaskService', () => {
+  let service: TaskService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SecurityService);
+    service = TestBed.inject(TaskService);
   });
 
   it('should be created', () => {

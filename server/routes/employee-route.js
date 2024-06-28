@@ -291,5 +291,214 @@ router.post('/:empId/tasks', (req, res, next)=> {
   }
 })
 
+//Tasks Schema
+const tasksSchema = {
+  type: 'object',
+  required: ['todo', 'done'],
+  additionalProperties: false,
+  properties: {
+    todo: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          _id: { type: 'string'},
+          text: { type: 'string'}
+        },
+        required: ['_id', 'text'],
+        additionalProperties: false
+      }
+    },
+    done: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          _id: { type: 'string' },
+          text: { type: 'string' }
+        },
+        required: ['_id', 'text'],
+        additionalProperties: false
+      }
+    }
+  }
+}
+
+/**
+ * updateTask
+ * @openapi
+ * /api/employees/{empId}/tasks:
+ *   put:
+ *     tags:
+ *       - Employees
+ *     description: Update the tasks
+ *     summary: Updates the tasks
+ *     parameters:
+ *        - name: empId
+ *          in: path
+ *          required: true
+ *          description: Updates tasks
+ *          schema:
+ *            type: number
+ *     requestBody:
+ *       description: Updates the tasks array
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - todo
+ *               - done
+ *             properties:
+ *               todo:
+ *                 type: array
+ *                 items:
+ *                    type: object
+ *                    properties:
+ *                      text:
+ *                        type: string
+ *                      _id:
+ *                        type: string
+ *               done:
+ *                 type: array
+ *                 items:
+ *                    type: object
+ *                    properties:
+ *                      text:
+ *                        type: string
+ *                      _id:
+ *                        type: string
+ *     responses:
+ *       '204':
+ *         description: Task Updated
+ *       '400':
+ *         description: Bad Request
+ *       '404':
+ *         description: Not Found
+ *       '500':
+ *         description: Internal Server Error
+ */
+
+//Update task API
+router.put('/:empId/tasks', (req, res, next) => {
+  try {
+    let { empId } = req.params;
+    empId = parseInt(empId, 10);
+
+    if (isNaN(empId)) {
+      return next(createError(400, 'Employee ID must be a number'))
+    }
+
+    mongo(async db => {
+      const employee = await db.collection('employees').findOne( {empId: empId});
+
+
+      if(!employee) {
+        //to see if our validation logic was checking if the employee object was showing up as null
+        console.log('employee not found validation code')
+        return next(createError(404, `Employee not found with empId ${empId}`));
+      }
+        //Checking code is valid
+        const tasks = req.body;
+        const validator = ajv.compile(tasksSchema);
+        const valid = validator(tasks)
+
+
+        //If the code is not valid send out an error
+        if(!valid) {
+          console.error('Invalid payload: ', validator.errors)
+          return next(createError(400, 'Invalid task payload', validator.errors))
+        }
+
+        const result = await db.collection('employees').updateOne(
+          {empId: empId},
+          { $set: { todo: tasks.todo, done: tasks.done }}
+
+
+        )
+
+        res.status(204).send();
+      }, next);
+
+    //Whenever we do something with a database there is the possibility that it will have an error
+    //The application will crash if it has no way to record the error
+    //Try/Catch is to catch that error and forward it to our middleware handler
+  } catch (err) {
+    console.error.apply('err', err)
+    next(err);
+  }
+})
+
+/**
+ * deleteTask
+ * @openapi
+ * /api/employees/{empId}/tasks/{taskId}:
+ *   delete:
+ *     tags:
+ *       - Employees
+ *     description: API for deleting a task by empId
+ *     summary: Delete task by ID
+ *     parameters:
+ *       - name: empId
+ *         in: path
+ *         required: true
+ *         scheme:
+ *           type: number
+ *       - name: taskId
+ *         in: path
+ *         required: true
+ *         scheme:
+ *           type: string
+ *     responses:
+ *       '204':
+ *         description: Task Deleted
+ *       '400':
+ *         description: Bad Request
+ *       '404':
+ *         description: Not Found
+ *       '500':
+ *         description: Internal Server Error
+ */
+
+router.delete('/:empId/tasks/:taskId', (req, res, next) => {
+  try {
+    let { empId } = req.params;
+    let { taskId } = req.params;
+
+    empId = parseInt(empId, 10);
+
+    if (isNaN(empId)) {
+      return next(createError(400, 'Employee ID must be a number'));
+
+    }
+
+    mongo(async db => {
+        let emp = await db.collection('employees').findOne({empId: empId});
+
+        if(!emp) {
+          return next(createError(404, `Employee not found with empId ${empId}`))
+        }
+
+        //if it doesn't exist in the employee record it will be set to an empty array
+        if (!emp.todo) emp.todo = [];
+        if (!emp.done) emp.done = [];
+
+        //Only give me the array of records without that done item or todo item
+        const todo = emp.todo.filter(t => t._id.toString() !== taskId.toString())
+        const done = emp.done.filter(t => t._id.toString() !== taskId.toString())
+
+        const result = await db.collection('employees').updateOne( {empId: empId}, {$set: {todo: todo, done: done}}
+
+        )
+
+        //Respond with a 204
+        res.status(204).send();
+      }, next);
+
+  } catch (err) {
+    console.error('err', err);
+    next(err);
+  }
+})
 
 module.exports = router;

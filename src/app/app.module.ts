@@ -1,7 +1,7 @@
 /**
  * Title: app.module.ts
- * Author: Professor Krasso
- * Date: 8/5/23
+ * Author: Professor Krasso/ Evelyn Zepeda
+ * Date: 6/27/24
  */
 
 // imports statements
@@ -16,8 +16,12 @@ import { NavComponent } from './layouts/nav/nav.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { TaskRoutingModule } from './tasks/tasks-routing.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -28,13 +32,17 @@ import { ContactComponent } from './contact/contact.component';
     FooterComponent,
     TasksComponent,
     ContactComponent,
+    AboutComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TaskRoutingModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

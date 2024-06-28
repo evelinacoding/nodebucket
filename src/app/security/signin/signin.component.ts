@@ -1,3 +1,9 @@
+/**
+ * Title: signin.component.ts
+ * Author: Evelyn Zepeda
+ * Date: 6/27/24
+ */
+
 import { SecurityService } from './../security.service';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';

@@ -24,7 +24,7 @@ h1 {
 h4, svg {
   color: #fff;
   margin: 20px;
-  font-family: Open-Sauce;
+  font-family: Open-Sauce, sans-serif;
 }
 
 .map {

@@ -1,3 +1,10 @@
+/**
+ * Title: auth.guard.ts
+ * Author: Evelyn Zepeda
+ * Date: 6/27/24
+ */
+
+
 import { CanActivateFn } from '@angular/router';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -14,4 +21,3 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
   }
 };
-  
